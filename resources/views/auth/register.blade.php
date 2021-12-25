@@ -8,11 +8,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.25/webcam.min.js"></script>
     <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <style type="text/css">
     #results { padding:20px; border:1px solid; background:#ccc; }
     body{
@@ -50,94 +50,84 @@
 <div class="d-flex flex-column justify-content-center align-items-center">
     <img src="assets/images/11.png" alt="" height="100" width="160" id="img1">
 </div>
-
-
 <div class="container" style="background-color:#bd2025">
-    <div class="row">
-        <div class="col-md-4 login_wrapper">
-            <div class="">
-            <form method="POST"  action="{{ route('register') }}">
-                 @csrf
-                    <div class="row">
-                        <div class="col-md-12 text-center">
+    <form method="POST"  action="{{ route('register') }}">
+        @csrf
+        <div class="row">
+            <div class="col-md-4 login_wrapper">
+                <div class="row">
+                    <div class="col-md-12">
                         <input type="text"  name="name" class="form-control @error('name') is-invalid @enderror my-2"  placeholder="Username"/>
                         @error('name')
                         <span class="invalid-feedback login__signup" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                            <strong>{{ $message }}</strong>
+                        </span>
                         @enderror
-                        </div>
                     </div>
+                </div>
 
-                    <div class="row">
-                        <div class="col-md-12 text-center">
+                <div class="row">
+                    <div class="col-md-12">
                         <input type="text"  name="email" class="form-control @error('email') is-invalid @enderror my-2"  placeholder="Email"/>
                         @error('email')
                         <span class="invalid-feedback login__signup" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                            <strong>{{ $message }}</strong>
+                        </span>
                         @enderror
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-12 text-center">
-                            <input type="password" name="password" class="form-control @error('password') is-invalid @enderror my-2" placeholder="Password"  />
-                            @error('password')
-                            <span class="invalid-feedback login__signup" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-12 text-center">
-                        <input type="password" name="password_confirmation" class="form-control my-2" placeholder="Password confirmation" />
-
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-5">
-                            <button type="button" class="btn btn-outline-danger text-white" onclick="return showWebCam()" id="webCamButton">
-                                Take Selfie
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-12">
-
-                        <button type="submit" class="btn btn-dark my-3">Submit</button>
-                            <p  class=" my-3">Got to login page &nbsp;<a href="signin">Sign In</a></p>
-                        </div>
                     </div>
                 </div>
-               
-            
-        </div>
-       
-        <div class="col-md-8 login_wrapper">
-            <div id="cameradiv" style="display:none">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <input type="password" name="password" class="form-control @error('password') is-invalid @enderror my-2" placeholder="Password"  />
+                        @error('password')
+                        <span class="invalid-feedback login__signup" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <input type="password" name="password_confirmation" class="form-control my-2" placeholder="Password confirmation" />
+
+                    </div>
+                </div>
+            </div> 
+            <div class="col-md-8 login_wrapper">
                 <div class="row">
                     <div class="col-md-6">
                         <div id="my_camera"></div>
-                        <button type="button" class="btn btn-danger" value="Click" onClick="take_snapshot()">Click</button>
-                        <input type="hidden" name="image" class="image-tag">
+                        <input type="hidden" name="image" class="image-tag @error('image') is-invalid @enderror">
+                        @error('image')
+                        <span class="invalid-feedback login__signup" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                        <a class="btn btn-danger mt-2" value="Click" onClick="take_snapshot()">Click</a>
                     </div>
 
-                    <div class="col-md-6">
-                            <div id="results" style="color:white;">Your captured image will appear here...</div>
-                        </div>
-                    </div>
-                    
+                    <div class="col-md-6" >
+                        <div id="results" style="color:white; width:100%; height:255px; border: 1px solid white;">Your captured image will appear here...</div>
+                        <a class="btn btn-danger mt-2" value="Click" onClick="cancelImage()">Cancel</a>
+                    </div> 
                 </div>  
+            </div>   
+        </div>
+        <div class="row">
+            <div class="col-md-4 login_wrapper">
+                <button type="submit" class="btn btn-dark my-3">Submit</button>
+                <span class=" my-3">Got to login page &nbsp;<a href="signin">Sign In</a></span>
             </div>
-        </div>        
-    </div>   
-</div>      
-</form>
+            <div class="col-md-8">
+                <div class="row">
+                    <div class=""></div>
+                </div>
+            </div>
+        </div>         
+    </form>
+</div>    
 
 
 <!-- partial -->
@@ -217,8 +207,8 @@
 </script>
 <script language="JavaScript">
     Webcam.set({
-        width: 270,
-        height: 270,
+        width: 340,
+        height: 258,
         image_format: 'jpeg',
         jpeg_quality: 90
     });
@@ -228,8 +218,11 @@
     function take_snapshot() {
         Webcam.snap( function(data_uri) {
             $(".image-tag").val(data_uri);
-            document.getElementById('results').innerHTML = '<img src="'+data_uri+'" width="100%" height="270px"/><h5>Click Submit and you are DONE</h5>';
+            document.getElementById('results').innerHTML = '<img src="'+data_uri+'" width="100%" height="255px"/>';
         } );
+    }
+    function cancelImage() {
+        document.getElementById('results').innerHTML = 'Your captured image will appear here...';
     }
 </script>
 </body>
